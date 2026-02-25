@@ -1,10 +1,19 @@
+/**
+ * @author Alberto
+ */
 package com.gameshop;
 
 public class SistemaRecompensasVip {
 
+    public static final int UMBRAL_RECOMPENSA_ORO = 100;
+    public static final int UMBRAL_RECOMPENSA_ORO2 = 500;
+
+    /**
+     * @param tipoCliente Es el texto que recibimos
+     * @return Devuelve 'true' si el texto coincide exactamente con "Premium".
+     */
+
     public boolean comprobarVip(String tipoCliente) {
-        // BUG (NPE): Si 'tipoCliente' es null (como pasa en el Main), intentar hacer .equals() lanza un NullPointerException.
-        // SOLUCIÓN SONARLINT: Escribir "Premium".equals(tipoCliente)
         if ("Premium".equals(tipoCliente)) {
             return true;
         } else {
@@ -12,25 +21,29 @@ public class SistemaRecompensasVip {
         }
     }
 
-    public String generarReporte(int puntos) {
-        String r = "";
+    /**
+     * @param punto es la cantidad de puntos que ha generado el cliente
+     * @return string que contiene las estrellas y el mensaje de si el cliente es leyenda o de oro
+     */
 
-        // CODE SMELL CRÍTICO: Concatenación de Strings en un bucle con '+' (usar StringBuilder)
+
+    public String generarReporte(int puntos) {
+        String reporteFinal = "";
+
         for (int i = 0; i < puntos; i++) {
-            r = r + "*";
+            reporteFinal = reporteFinal + "*";
         }
 
-        // CODE SMELL: Complejidad Cognitiva alta (Escalera de Ifs)
         if (puntos > 0) {
-            if (puntos >= 100) {
-                if (puntos >= 500) {
-                    r = r + " ¡CLIENTE LEYENDA!";
+            if (puntos >= UMBRAL_RECOMPENSA_ORO) {
+                if (puntos >= UMBRAL_RECOMPENSA_ORO2) {
+                    reporteFinal = reporteFinal + " ¡CLIENTE LEYENDA!";
                 } else {
-                    r = r + " ¡CLIENTE ORO!";
+                    reporteFinal = reporteFinal + " ¡CLIENTE ORO!";
                 }
             }
         }
 
-        return r;
+        return reporteFinal;
     }
 }

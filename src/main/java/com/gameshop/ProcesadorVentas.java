@@ -1,3 +1,7 @@
+/**
+ * @author Alberto
+ */
+
 package com.gameshop;
 
 public class ProcesadorVentas {
